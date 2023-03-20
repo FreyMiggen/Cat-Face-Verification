@@ -34,7 +34,7 @@ def test_result(filename,result):
         return False
 
 def detect(img_path,model_version='00'):
-    if model_version in ['00','05','02']:
+    if model_version in ['00','05','03']:
         model_path=f'resnet/resnet_50v2_emb_32_margin_02_alpha_{model_version}_40_epoch.h5'
         filedirs=[os.path.join(f'checkup/alpha{model_version}',filename) for filename in os.listdir(f'checkup/alpha{model_version}')]
     else:
