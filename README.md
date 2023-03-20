@@ -28,6 +28,7 @@ For usage in verification, I have implemented some additional implementation. Th
 - Store 3 best embedding vectors of each cat 
 - When the user input an image, it will be passed to the final model and encoded to an 32 dimensional embedding feature vector (input embedding). 
 - This vector is than compared to 3 embedding vectors of each cat stored in the database. If there is a cat in the database that the distance between at least 2 out of its  3 best embedding vectors and the input embedding is less or equal to 0.5, than the cat in the input image and the cat with the embedding vectors is decide to be the same one.
+
 # User instruction
 Users can use this project for the following tasks:
 1. Verification job: to check whether a cat image is already stored in the database. For more detail, run 
