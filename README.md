@@ -1,5 +1,5 @@
 # Cat-Face-Verification
-A model using triplet loss to solve the task of cat face verification.
+A model using triplet loss to solve the task of cat face verification. Code for this project could be found at <a href='https://github.com/FreyMiggen/Cat-Face-Verification/tree/master'>FreyMiggen-cat-verification</a>.
 ## Explain the main idea behind triplet loss
 Please read  <a href="https://omoindrot.github.io/triplet-loss">this artice</a> for the main idea behind triplet loss and its usage in Face Verification. 
 This is a project that is similar to one the paper of it is published at <a href="http://cs230.stanford.edu/projects_fall_2019/reports/26251543.pdf">Pet Cat Face Verification and Identification</a>.
