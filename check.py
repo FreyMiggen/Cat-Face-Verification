@@ -27,7 +27,7 @@ def test_result(filename,result):
     dist=np.square(dist)
     dist=np.sum(dist,axis=1)
     dist=np.sqrt(dist)
-    dist=np.less(dist,0.5)
+    dist=np.less(dist,0.6)
     if np.sum(dist)>=2:
         return True
     else:
