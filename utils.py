@@ -158,6 +158,27 @@ def accuracy_triplet(labels,embeddings,margin=0.2,squared=False):
     num_valid_triplets = tf.reduce_sum(mask)
     return num_negative_triplets/num_valid_triplets
 
+def veri_accuracy(labels,embeddings,lower_thres=0.5,upper_thres=1.0,squared=False):
+    """Return a 2D mask where mask[a, b] is True if the (a, b) is of same label and false if (a,b) is of different label.
+    """
+    pos_equal = tf.equal(tf.expand_dims(labels, 0), tf.expand_dims(labels, 1))
+    neg_equal=tf.cast(tf.logical_not(pos_equal),dtype=tf.float32)
+    pos_equal=tf.cast(pos_equal,dtype=tf.float32)
+    
+    pairwise_dist,dot_product = _pairwise_distances(embeddings, squared=squared)
+    
+    pos_dist=tf.math.multiply(pos_equal,pairwise_dist)
+    neg_dist=tf.math.multiply(neg_equal,pairwise_dist)
+    
+    #filter out neg_dist which is set to 0
+  
+    checked_pos=tf.cast(tf.less(pos_dist,lower_thres),dtype=tf.float32)
+    filtered_checked_pos=tf.math.reduce_sum(checked_pos)-tf.math.reduce_sum(neg_equal)
+    
+    checked_neg=tf.cast(tf.greater(neg_dist,upper_thres),dtype=tf.float32)
+    checked_neg=tf.math.reduce_sum(checked_neg)
+    return filtered_checked_pos,checked_neg,tf.math.reduce_sum(pos_equal)
+
 ################################################
 def process_img(img,label):
     img=tf.keras.applications.resnet_v2.preprocess_input(img)
