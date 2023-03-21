@@ -78,7 +78,9 @@ def train(datadir,margin=0.2,alpha=0,num_epochs=40,pretrained_model_path='none')
         print(f'Loss at epoch {epoch}: ',np.mean(running_loss))
         print(f'Accuracy at epoch {epoch}: ',np.mean(running_acc))
 
-   
+    run_existed=os.path.exists('run')
+    if not run_existed:
+        os.makedirs('run')
     count=len(os.listdir('run'))
     os.makedirs(f'run/{count}/checkup')
     model.save(f'run/{count}/model.h5')
