@@ -22,12 +22,12 @@ The main hyperparameters of the loss function is:
 Since the accurary of the model is not obvious from the triplet loss, I have built a function to output the percentage of the triplet that the model succeeds in pushing the gap between dist(anchor,pos) and dist(anchor,neg) larger than margin value. 
 ## Training
 In order to find out what are the best values for alpha, I have seperately tried using 3 values for alpha : 0 (no regularization); 0.3 ; 0.5. It turned out that for my dataset, the problem pointed out in the paper (that the triplet loss tends to push embeddings quickly collapse to a single vector, setting the loss to be equal to the
-margin) is not present since with alpha set to 0; 0.3 or 0.5, the performance of the model does not show a significant improvement or decrease. With all 3 values of alpha, the model obtains the accuracy of around 95% after 40 epochs and nearly 99% after 60 epochs (on the training set).  
+margin) is not present since with alpha set to 0; 0.3 or 0.5, the performance of the model does not show a significant improvement or decrease. With all 3 values of alpha, the model obtains the accuracy rate of around 0.95 after 40 epochs and nearly 0.99 after 60 epochs (on the training set). On the validification set, with alpha set to 0.0, 0.3, 0.5, the accuracy rate obtained after 60 epochs is 0.98, 0.99 and 0.96, respectively.
 
 ## Verification capability
 For usage in verification, I have implemented some additional implementation. The goal is to:
 - Store 3 best embedding vectors of each cat 
-- When the user input an image, it will be passed to the final model and encoded to an 32 dimensional embedding feature vector (input embedding). 
+- When the user inputs an image, it will be passed to the final model and encoded to an 32 dimensional embedding feature vector (input embedding). 
 - This vector is than compared to 3 embedding vectors of each cat stored in the database. If there is a cat in the database that the distance between at least 2 out of its  3 best embedding vectors and the input embedding is less or equal to 0.5, than the cat in the input image and the cat with the embedding vectors is decide to be the same one.
 
 # User instruction
