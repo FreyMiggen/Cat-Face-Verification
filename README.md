@@ -12,7 +12,7 @@ However, due to the fact that I could not access to the API stipulated in the pa
  I did some small modification to the model so that it suits my purpose better. This model outputs an 32 dimensional embedding feature vector given `224*224*3` image. The last layer of the model is a Lambda one that L2 normalize the embedding vector feature. Only after 60 epochs, the model acquired the accuracy of 99% on the training set and around 97% on the testset, which was a great improvement compared with the former model. 
 ## Triplet Loss
 The approach I use for building loss function is online tripling. This approach is executed spetacularly in <a href="https://omoindrot.github.io/triplet-loss">this artice</a>. The original implementation of online tripling in the aforementioned article does not use regularization. However, in the paper <a href="http://cs230.stanford.edu/projects_fall_2019/reports/26251543.pdf">Pet Cat Face Verification and Identification</a>, a regularization term is introduced, This customized regularization punishes the model when the anchor vector and the negative vector are similar (far from orthogonal). I decided to put this regularization to test and incorporated the it into the loss function.The final loss function used in this model is:
-                                       `L = max(d(a, p) - d(a, n) + margin, 0) + alpha*a^T*n`
+                                       `L = max(d(a, p) - d(a, n) + margin, 0) + alpha*((a^T*n)^2 + max(0,(a^T*n)^2 - (1/d)))` with d set to 32.
 The main hyperparameters of the loss function is: 
 1. Margin: indicate how far we expect the gap between (anchor_embedding-negative_embedding) and (anchor_embedding-positive_embedding)
 2. Alpha: indicate how influential the regularization term is
