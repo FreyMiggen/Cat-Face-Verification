@@ -68,13 +68,19 @@ def detect(img_path,model_version='05_60'):
     min_dist=10
     chosen='none'
     existed=False
+
     for file in filedirs:
-        if most_similar(file,test_emb)<=min_dist:
-            min_dist=most_similar(file,test_emb)
+        if test_result(file,test_emb)==1:
+            existed=True
             chosen=file
 
-    if test_result(chosen,test_emb)==1:
-        existed=True
+    if not existed:        
+        for file in filedirs:
+            if most_similar(file,test_emb)<=min_dist:
+                min_dist=most_similar(file,test_emb)
+                chosen=file
+
+
     
     chosen=os.path.normpath(chosen)
     fname=chosen.split('\\')[-1].split('.')[0].split('_')[-1]
@@ -86,7 +92,7 @@ def Main():
     parser=argparse.ArgumentParser()
     parser.add_argument('img_path',help='Add the image path of the cat image you want to test')
     parser.add_argument('-m','--model_version',help='If you dont want to use the default model, declare the model version you want to use \n option: 00_40, 03_40,05_40, 00_60, 03_60,05_60 \n syntax: alpha_epoch',
-    default='05_60')
+    default='03_60')
     
     args=parser.parse_args()
     result=detect(args.img_path,args.model_version)
