@@ -39,5 +39,5 @@ For usage in verification, I have implemented some additional implementation. Th
 Users can use this project for the following tasks:
 1. Verification job: to check whether a cat image is already stored in the database. For more detail, run 
 `py check.py -h`
-[! Image in the database] (Screenshot%202023-03-21%20141511.png)
+![Image in the database](Screenshot%202023-03-21%20141511.png)
 2. Retrain the model. If you have a bigger or a different dataset and want to retrain the model, run `py train.py -h` for more detail
