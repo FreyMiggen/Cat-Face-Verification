@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>textured_stars_light - examples</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html"><span class="logo_colour">CAT FACE VERIFICATION PROJECT</span></a></h1>
+          <h2>Facenet. Online triplet loss. Verification problem.</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li class="selected"><a href="index.html">Overview</a></li>
+          <li><a href="examples.html">Illustration</a></li>
+    
+        </ul>
+      </div>
+    </div>
+
+    <div id="site_content">
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1> Illustration On How The Model Performs</h1>
+        <p>When user inputs a cat face image, the model will encode it into 32 dimensional feature vector. This vector is then compared with each one stored
+          in the database to decide whether the cat in the input image is similar enough to be one of the cat that is recorded in the database.
+        <p><img src="images/positive.png" width="800"></p>
+        <p>If the model decides that the cat in the input image is one of the cats stored in the database, it will returns the location of the image folder of the cat </p>
+        <table>
+          <tr>
+          
+          <th colspan="2" style="font-size: 28px;">Cats with images stored in the Databse</th>
+          
+          </tr>
+          
+          <tr>
+    
+          <th style="width: 400px;">Input Image</th>
+          
+          <th>Output Image</th>
+          
+          </tr>
+          
+          <tr>
+
+          <td><img src="images/cat_1.png" alt="white cat" width="200"></td>
+          
+          <td><img src="images/database_1.jpg" alt="tuxedo cat" width="200"></th>
+          
+          </tr>
+          
+          <tr>
+
+          <td><img src="images/cat_2.png" alt="yellow cat" width="200"></th>
+          
+          <td><img src="images/database_2.jpg" width="200"></th>
+          
+          </tr>
+          
+          <tr>
+          
+          <td><img src="images/cat_3.png" alt="tuxedo cat" width="200"></th>
+          
+          <td><img src="images/database_3.jpg" alt="tuxedo cat" width="200"></th>
+          
+          </tr>
+          
+          </table>
+  
+    <hr>
+    <p>
+    
+    </p>
+    <p>If the model decides that the cat in the input image is not one of the cats stored in the database, it will returns the image of the cat in the database that is most similar </p>
+    <p><img src="images/positive.png" width="800"></p>
+      
+        <table>
+    
+          <tr>
+          
+          <th colspan="2" style="font-size: 28px;">Cats with images not stored in the Databse</th>
+          
+          </tr>
+          
+          <tr>
+          <th style="width: 400px;">Input Image</th>
+          
+          <th>Output Image</th>
+          
+          </tr>
+    
+          <tr>
+          
+          <td><img src="images/cat_4.png" alt="white cat" width="200"></td>
+          
+          <td><img src="images/database_4.jpg" alt="tuxedo cat" width="200"></th>
+          
+          </tr>
+          
+          <tr>
+
+          <td><img src="images/cat_5.png" alt="yellow cat" width="200"></th>
+          
+          <td><img src="images/database_5.jpg" width="200"></th>
+          
+          </tr>
+          
+          <tr>
+          <td><img src="images/cat_6.png" alt="tuxedo cat" width="200"></th>
+          
+          <td><img src="images/database_6.jpg" alt="tuxedo cat" width="200"></th>
+          
+          </tr>
+          
+          </table>
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>
