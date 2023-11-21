@@ -3,8 +3,8 @@ A model using triplet loss to solve the task of cat face verification. Code for 
 Some more detail on the performance of this project could be found at <a href ='https://freymiggen.github.io/Cat-Face-Verification/'>Report</a>
 
 <p align="center">
-  <img src="/output1.png" width="300" />
-  <img src="/output2.png" width="300" /> 
+  <img src="/output1.png" width="400" />
+  <img src="/output2.png" width="400" /> 
 </p>
 
 
