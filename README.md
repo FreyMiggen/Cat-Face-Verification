@@ -2,7 +2,11 @@
 A model using triplet loss to solve the task of cat face verification. Code for this project could be found at <a href='https://github.com/FreyMiggen/Cat-Face-Verification/tree/master'>FreyMiggen-cat-verification</a>.
 Some more detail on the performance of this project could be found at <a href ='https://freymiggen.github.io/Cat-Face-Verification/'>Report</a>
 
-<img src='./output1.png' height=300>
+<p align="center">
+  <img src="/output1.png" width="200" />
+  <img src="/output2.png" width="200" /> 
+</p>
+
 
 ## Explain the main idea behind triplet loss
 Please read  <a href="https://omoindrot.github.io/triplet-loss">this artice</a> for the main idea behind triplet loss and its usage in Face Verification. 
