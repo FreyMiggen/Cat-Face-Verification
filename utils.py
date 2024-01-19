@@ -2,6 +2,7 @@ import tensorflow as tf
 import os
 import numpy as np
 
+
 def _pairwise_distances(embeddings, squared=False):
     """Compute the 2D matrix of distances between all the embeddings.
 
@@ -159,7 +160,8 @@ def accuracy_triplet(labels,embeddings,margin=0.2,squared=False):
     return num_negative_triplets/num_valid_triplets
 
 def veri_accuracy(labels,embeddings,lower_thres=0.5,upper_thres=1.0,squared=False):
-    """Return a 2D mask where mask[a, b] is True if the (a, b) is of same label and false if (a,b) is of different label.
+    """
+    Return a 2D mask where mask[a, b] is True if the (a, b) is of same label and false if (a,b) is of different label.
     """
     pos_equal = tf.equal(tf.expand_dims(labels, 0), tf.expand_dims(labels, 1))
     neg_equal=tf.cast(tf.logical_not(pos_equal),dtype=tf.float32)
@@ -203,12 +205,25 @@ def process_img_batch(filepaths,model):
     return emb
 
 
-def select_anchor_vects(sub_dir,saved_fol,model):
-    #saved_fol: path to the folder that saves embedding vectors  (run/{count}/checkup)
-    #sub_dir: path to the sub folder of the training dataset folder
-    sub_dir=os.path.normpath(sub_dir)
-    saved_fol=os.path.normpath(saved_fol)
-    filepaths=[os.path.join(sub_dir,filename) for filename in os.listdir(sub_dir)]
+def add_face_to_db(img_dir,db_path,model=None,model_path='model/model_90.h5',add_to_img_db=False,img_db_path=None):
+    
+    """
+    Usage: Given a folder containing at least 5 images of a cat face, calculate 
+    the 3 best embedding vectors and store them in the embedding db; optionally
+    store original images in image db
+    Notice: file in vector db and sub folder in image db have the same name and is
+           also the name of img_dir
+    Args:
+        img_dir: path of the folder containing images
+        db_path: path to the folder that saves embedding vectors, 
+                   defaul is 'run/{count}/img_db'
+    """
+    if model is None:
+        model=tf.keras.models.load_model(model_path)
+        
+    img_dir=os.path.normpath(img_dir)
+    db_path=os.path.normpath(db_path)
+    filepaths=[os.path.join(img_dir,filename) for filename in os.listdir(img_dir)]
     cat_emb=process_img_batch(filepaths,model)
     
     dist_cat= _pairwise_distances(cat_emb, squared=False)[0]
@@ -218,6 +233,32 @@ def select_anchor_vects(sub_dir,saved_fol,model):
     data= [cat_emb[ind[0]],cat_emb[ind[1]],cat_emb[ind[2]]]
     data=np.asarray(data)
     
-    #savename: run/count/checkup/name_of_the_sub_dir.csv
-    saved_name=os.path.join(saved_fol,sub_dir.split('\\')[-1])
+    #savename: run/count/emb_db/name_of_the_sub_dir.csv
+    
+    saved_name=os.path.join(db_path,img_dir.split('\\')[-1])
     np.savetxt(f'{saved_name}.csv',data,delimiter=',')
+    
+    if add_to_img_db==True:
+        if img_db_path is None:
+            saved_sub_fol=os.path.join('0/0',img_dir.split('\\')[-1])
+        else:
+            saved_sub_fol=os.path.join(img_db_path,img_dir.split('\\')[-1])
+        for fname in filepaths:
+            shutil.copy(fname,saved_sub_fol)
+        
+        
+    
+    
+# def add_face_to_db(sub_dir,model=None,model_path='model/model_90.h5'):
+#     if model is None:
+#         model=tf.keras.models.load_model(model_path)
+        
+#     img_names=os.listdir(sub_dir)
+#     img_paths=[os.path.join(sub_dir,fname) for fname in img_names]
+    
+#     select_anchor_vects(sub_dir
+    # embeddings=process_img_batch(img_paths,model)
+    
+    
+    
+    
